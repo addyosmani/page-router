@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>page-router Demo</title>
+
+  <script src="../platform/platform.js"></script>
+  <link rel="import" href="page-router.html">
+
+</head>
+<body unresolved>
+
+    <!-- Define routes -->
+    <page-router route="/home" auto/>
+    <page-router path="/favorites"/>
+    <page-router path="/about"/>
+    <page-router path="/books"/>
+    <page-router path="/books/view/:bookId"/>
+    <page-router path="/:foo/:bar/:bazz"/>
+
+    <h2>Examples</h2>
+    <!-- Use routes -->
+    <p>Click on a route (or open in a new tab) to test &lt;page-router&gt;:</p>
+    <ul>
+        <li><a href="#/favorites">#/favorites</a></li>
+        <li><a href="#/about">#/about</a></li>
+        <li><a href="#/books">#/books</a></li>
+        <li><a href="#/books/view/25">#/books/view/25</a></li>
+        <li><a href="#/cat/hat/bat">#/cat/hat/bat</a></li>
+    </ul>
+
+    <h2>Listen for changes via the <code>route-changed</code> event</h2>
+    <pre id="console"></pre>
+
+    <h2>Usage</h2>
+    <pre>
+&lt;!-- Automatically go to a route 'home' --&gt;
+&lt;page-router route=&quot;/home&quot; auto/&gt;
+
+&lt;!-- Define paths to routes we would like to support --&gt;
+&lt;page-router path=&quot;/favorites&quot;/&gt;
+&lt;page-router path=&quot;/about&quot;/&gt;
+&lt;page-router path=&quot;/books&quot;/&gt;
+&lt;page-router path=&quot;/books/view/:bookId&quot;/&gt;
+&lt;page-router path=&quot;/:foo/:bar/:bazz&quot;/&gt;        
+    </pre>
+
+    <script>
+    var myConsole = document.querySelector('#console');
+    
+    myConsole.log = function() {
+        var args = Array.prototype.slice.call(arguments).toString();
+        this.innerHTML += '\n' + args;
+    }
+
+    document.addEventListener('route-changed', function(route){
+        myConsole.log('<span class="btn">You are on: ' + route.detail + '</span>');
+    });
+    </script>
+
+</body>
+</html>
