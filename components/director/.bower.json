@@ -1,0 +1,13 @@
+{
+  "name": "director",
+  "homepage": "https://github.com/flatiron/director",
+  "_release": "e4a7d4a3d0",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "e4a7d4a3d002ef2cdaf79fafd787d33d79a544d5"
+  },
+  "_source": "git://github.com/flatiron/director.git",
+  "_target": "master",
+  "_originalSource": "flatiron/director"
+}

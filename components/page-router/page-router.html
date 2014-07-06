@@ -1,0 +1,95 @@
+<link rel="import" href="../polymer/polymer.html">
+<script src="../director/build/director.min.js"></script>
+
+<!--
+Declarative URL routing for Polymer elements.
+
+#### Examples:
+
+  Define paths to routes we would like to support:
+  
+    <page-router path="/favorites"/>
+    <page-router path="/about"/>
+    <page-router path="/books"/>
+    <page-router path="/books/view/:bookId"/>
+    <page-router path="/:foo/:bar/:bazz"/>
+
+  Automatically navigate to a route 'home':
+
+    <page-router route="/home" auto/>
+ 
+  Listen out for a route-changed event:
+
+    document.addEventListener('route-changed', function(route){
+       //route.detail is the current route
+    });
+
+@element page-router
+@blurb Declarative URL routing for Polymer elements.
+
+@status alpha
+@homepage http://github.com/addyosmani/page-router
+-->
+<polymer-element name="page-router" attributes="route path auto">
+  <script>
+    (function() {
+      var private_router;
+      var routers;
+      Polymer('page-router', {
+        /**
+         * The `path` attribute represents a new path you would like supported. Navigating to the route will fire a `route-changed` event that can be listened for.
+         * 
+         * @attribute path
+         * @type string
+         */
+        path: '',
+        /**
+         * The `auto` attribute toggles updating the window location hash.
+         * 
+         * @attribute auto
+         * @type boolean
+         */
+        auto: false,
+        /**
+         * The `route` attribute represents the current route navigated to.
+         * 
+         * @attribute route
+         * @type string
+         */
+        route: '',
+        ready: function() {
+          // If initializing with a route to auto-navigate to
+          // ensure a change event is fired.
+          if(this.route !== ""){
+            this.fireChange();
+          }
+          // Otherwise, setup listeners for this.path
+          // and fire a change event when complete
+          this.router.on(this.path, function (route) {
+            this.route = route;
+            this.fireChange();
+          }.bind(this));
+        },
+        
+        /**
+         * The `route-changed` event is fired whenever a URL route has changed. It will return an object containing the detail of the route navigated to.
+         * 
+         * @event route-changed
+         */
+        fireChange: function() {
+          if (this.router.getRoute() =='' && this.auto){
+            window.location.hash = this.route;
+          }
+          this.fire('route-changed', this.router.getRoute()); 
+        },
+        get router() {
+          if (!private_router) {
+            private_router = new Router();
+            private_router.init();
+          }
+          return private_router;
+        }
+      });
+    })();
+  </script>
+</polymer-element>

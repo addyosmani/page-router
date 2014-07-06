@@ -1,0 +1,20 @@
+{
+  "name": "page-router",
+  "version": "0.1.0",
+  "authors": [
+    "Addy Osmani <addyosmani@gmail.com>"
+  ],
+  "description": "Declarative URL routing for Polymer elements.",
+  "keywords": "routing, route, polymer, web-components",
+  "main": "page-router.html",
+  "license": "Apache2",
+  "homepage": "https://github.com/addyosmani/page-router/",
+  "ignore": [
+    "**/.*"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.3.3",
+    "polymer-test-tools": "Polymer/polymer-test-tools#~0.3.3",
+    "director": "flatiron/director#master"
+  }
+}
